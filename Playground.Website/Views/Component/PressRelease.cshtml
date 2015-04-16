@@ -1,0 +1,12 @@
+﻿@model DD4T.ContentModel.IComponentPresentation
+@using DD4T.Mvc.Html
+@{
+    Layout = null;
+    var component = Model.Component;
+}
+
+<article>
+    <h3><a href="@component.GetResolvedUrl()" title="@component.Fields["title"].Value">@component.Fields["title"].Value</a></h3>
+    <p>@component.Fields["summary"].Value</p>
+    <hr />
+</article>

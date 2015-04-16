@@ -1,0 +1,21 @@
+﻿@model DD4T.ContentModel.IComponentPresentation
+@using DD4T.Mvc.Html
+@{
+    Layout = null;
+    var component = Model.Component;
+}
+
+<article>
+    <h1>@component.Fields["title"].Value</h1>
+    <p>@component.Fields["body"].Value.ResolveRichText()</p>
+    <p>
+        <b>About @component.Fields["boilerplate"].LinkedComponentValues[0].Fields["title"].Value<br /></b>
+        @component.Fields["boilerplate"].LinkedComponentValues[0].Fields["description"].Value
+    </p>
+    <p><b>For all information, see: </b><b><a href="@component.Fields["boilerplate"].LinkedComponentValues[0].Fields["link"].Value">@component.Fields["boilerplate"].LinkedComponentValues[0].Fields["link"].Value</a></b></p>
+    <p><b>Contact:<br /></b></p>
+    @for (var i = 1; i < component.Fields["mediacontacts"].Values.Count; i++)
+    {
+        <p><b>@component.Fields["mediacontacts"].LinkedComponentValues[i].Fields["organisation"].Value</b>: @component.Fields["mediacontacts"].LinkedComponentValues[i].Fields["name"].Value, @component.Fields["mediacontacts"].LinkedComponentValues[i].Fields["title"].Value<br />Phone: @component.Fields["mediacontacts"].LinkedComponentValues[i].Fields["phone"].Value / <a href="mailto:#">@component.Fields["mediacontacts"].LinkedComponentValues[i].Fields["email"].Value</a></p>
+    }
+</article>
